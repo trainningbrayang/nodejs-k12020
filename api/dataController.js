@@ -9,7 +9,7 @@ router.route("/GetUser").post(GetUser);
 async function createUser(req, res) {
 
     await userCollection.create({ username: req.body.username, pass: req.body.pass });
-    res.send("Test ok: " + req.body.username);
+    res.send("Create ok: " + req.body.username);
 
 }
 async function UpdateUser(req, res) {
@@ -27,8 +27,8 @@ async function UpdateUser(req, res) {
 
 }
 async function GetUser(req, res) {
-
-    const user = await userCollection.findOne({ "username": req.body.username })
+    var username = req.header("username")
+    const user = await userCollection.findOne({ "username": username })
 
     if (user) {
         //res.status(200).send(user);
